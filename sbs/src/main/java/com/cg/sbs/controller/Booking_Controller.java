@@ -45,14 +45,23 @@ public class Booking_Controller {
 
 	@Autowired
 	private Booking_Util bookingUtil;
+	
+	/* Case: postMapping add
+	 Outcome:adds new booking ot the table.
+	 */
 
 	@PostMapping("/add")
 	public BookingResponse addBooking(@RequestBody @Valid AddBookingRequest request) {
 		Booking booking = new Booking();
 		Cart cart = cartService.findCartByCustomer(request.getCustomerId());
-		booking.setCart(cart);
+		booking.setCart(cart)
 		return bookingUtil.toBookingResponse(bookingService.addBooking(booking));
 	}
+	
+	/*
+		@PutMapping Update
+		outcome : updates the table
+	*/
 
 	@PutMapping("/update")
 	public BookingResponse updateBooking(@RequestBody @Valid UpdateBookingRequest request) {
@@ -60,12 +69,20 @@ public class Booking_Controller {
 		booking.setBookingStatus(request.getBookingStatus());
 		return bookingUtil.toBookingResponse(bookingService.updateBooking(booking));
 	}
+	
+	/* @deleteMapping delete
+	   outcome : deletes colomn in the table
+	*/
 
 	@DeleteMapping("/delete")
 	public BookingResponse deleteBooking(@RequestBody @Valid VieworDeleteBookingRequest request) {
 		Booking booking = bookingService.viewBooking(request.getBookingId());
 		return bookingUtil.toBookingResponse(bookingService.removeBooking(booking));
 	}
+	
+	/* @GetMapping view
+	  outcome : views all the contents of the table
+	  */
 
 	@GetMapping("/view/{id}")
 	public BookingResponse viewBooking(@PathVariable @NotNull(message="bookingId cannot be null") Integer id ) {
