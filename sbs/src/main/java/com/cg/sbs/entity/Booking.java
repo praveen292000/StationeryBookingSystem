@@ -12,17 +12,17 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Booking {
 
-	@GeneratedValue		// auto generates vlaues
-	@Id			// marks identifier for this entity
+	@GeneratedValue
+	@Id
 	private int bookingId;
 	private LocalDateTime bookingDate;
 
-	@ManyToOne		//creates many to one connections
+	@ManyToOne
 	private Cart cart;
 
 	private String bookingStatus;
 
-	@ManyToMany(fetch = FetchType.EAGER)		// creates many to many connections
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Product> products;
 
 	public Booking() {
@@ -69,7 +69,7 @@ public class Booking {
 		return cart;
 	}
 
-	@Override		// over writes the base class
+	@Override
 	public String toString() {
 		return "Booking [bookingId=" + bookingId + ", bookingDate=" + bookingDate + ", cart=" + cart
 				+ ", bookingStatus=" + bookingStatus + ", products=" + products + "]";
